@@ -1,5 +1,5 @@
 import streamlit as st
-
+import csv
 
 #Set app to wide mode
 st.set_page_config(layout="wide")
@@ -56,7 +56,45 @@ ambition_demarche = st.selectbox("27.Quelle est l'ambition de votre démarche RS
 raison_demarche = st.selectbox("28. La raison principale de votre démarche RSE ?", ["Règlementation ?", "Demandes Clients (AO)/ partenaires / invest? ", "Conviction Environnementale et Sociale ?"])
 budget_rse = st.number_input("29. Quel est votre budget pour une démarche RSE en k€?", min_value=0,max_value=100000000,value=50)
 
-# Calcul des scores (à compléter)
+def save_to_csv(data, filename="reponses.csv"):
+    """Enregistre les données dans un fichier CSV."""
+    with open(filename, mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerow(data)  # Écrire directement la liste de réponses
+
 if st.button("Calculer la Maturité"):
     # Logique de scoring basée sur les réponses (à implémenter)
-    st.write("Résultats du calcul de la maturité (à implémenter)")
+        reponses = [
+            ["Raison Sociale", raison_sociale],
+            ["Nb Collaborateurs/habitants", nb_collaborateurs],
+            ["CA", ca],
+            ["Bilan", bilan],
+            ["Secteur", secteur],
+            ["Comité Sensibilisé", comite_sensibilise],
+            ["organisation_sensibilise_management", organisation_sensibilise_management],
+            ["organisation_sensibilise_collaborateurs", organisation_sensibilise_collaborateurs],
+            ["formation_experts", formation_experts],
+            ["enjeux_rse_identifies", enjeux_rse_identifies],
+            ["feuille_de_route", feuille_de_route],
+            ["estimation_ges", estimation_ges],
+            ["bilan_ges_complet", bilan_ges_complet],
+            ["plan_reduction_carbone", plan_reduction_carbone],
+            ["saas_kpi_environnementaux", saas_kpi_environnementaux],
+            ["engagement_sbti", engagement_sbti],
+            ["rapport_rse", rapport_rse],
+            ["analyse_materialite_simple", analyse_materialite_simple],
+            ["Canalyse_materialite_double", analyse_materialite_double],
+            ["analyse_iro", analyse_iro],
+            ["risques_climatiques_physiques", risques_climatiques_physiques],
+            ["conformite_csrd", conformite_csrd],
+            ["notation_ecovadis", notation_ecovadis],
+            ["label_rse", label_rse],
+            ["temps_plein_rse", temps_plein_rse],
+            ["dispo_etudes", dispo_etudes],
+            ["ambition_demarche", ambition_demarche],
+            ["raison_demarche", raison_demarche],
+            ["budget_rse", budget_rse]
+            ]
+        save_to_csv(reponses)
+        st.success("Les réponses ont été enregistrées dans reponses.csv")
+        st.write("Résultats du calcul de la maturité (à implémenter)")
